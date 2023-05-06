@@ -1,4 +1,4 @@
-package kaleo.chat.app
+package com.nhub.stockbook
 
 import io.flutter.embedding.android.FlutterActivity
 
