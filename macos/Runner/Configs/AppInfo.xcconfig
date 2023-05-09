@@ -8,7 +8,7 @@
 PRODUCT_NAME = stockbook
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.nhub.stockbook.truelLocal
+PRODUCT_BUNDLE_IDENTIFIER = kaleo.chat.app.truelLocal
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2023 com.nhub.stockbook. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2023 kaleo.chat.app. All rights reserved.
