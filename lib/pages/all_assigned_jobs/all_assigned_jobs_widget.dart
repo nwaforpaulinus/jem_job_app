@@ -45,7 +45,7 @@ class _AllAssignedJobsWidgetState extends State<AllAssignedJobsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+
     if (currentUserLocationValue == null) {
       return Container(
         color: FlutterFlowTheme.of(context).primaryBackground,
@@ -183,13 +183,14 @@ class _AllAssignedJobsWidgetState extends State<AllAssignedJobsWidget> {
                                   16.0, 0.0, 16.0, 16.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
+
                                   currentUserLocationValue =
                                       await getCurrentUserLocation(
                                           defaultLocation: LatLng(0.0, 0.0));
 
                                   final errandsUpdateData =
                                       createErrandsRecordData(
-                                    employeeLocation: currentUserLocationValue,
+                                    employeeLatLong: currentUserLocationValue,
                                     isConfirmed: true,
                                   );
                                   await listViewErrandsRecord.reference

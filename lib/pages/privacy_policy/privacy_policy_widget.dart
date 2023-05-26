@@ -2,10 +2,11 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'privacy_policy_model.dart';
 export 'privacy_policy_model.dart';
+import '../../navigations/nav.dart';
+
 
 class PrivacyPolicyWidget extends StatefulWidget {
   const PrivacyPolicyWidget({Key? key}) : super(key: key);
@@ -36,7 +37,7 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    
 
     return Scaffold(
       key: scaffoldKey,

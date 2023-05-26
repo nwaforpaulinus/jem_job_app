@@ -1,3 +1,5 @@
+import 'package:go_router/go_router.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -39,7 +41,7 @@ class _EmptyJobListingWidgetState extends State<EmptyJobListingWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    
 
     return Container(
       width: double.infinity,

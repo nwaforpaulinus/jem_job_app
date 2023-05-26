@@ -56,10 +56,11 @@ abstract class ErrandsRecord
 
 Map<String, dynamic> createErrandsRecordData({
   LatLng? location,
+  LatLng? destinationLocation,
   String? address,
   DocumentReference? userRef,
   String? errandName,
-  LatLng? employeeLocation,
+  LatLng? employeeLatLong,
   bool? isConfirmed,
 }) {
   final firestoreData = serializers.toFirestore(
@@ -67,13 +68,13 @@ Map<String, dynamic> createErrandsRecordData({
     ErrandsRecord(
       (e) => e
         ..location = location
+        ..destinationLocation = destinationLocation
         ..address = address
         ..userRef = userRef
         ..errandName = errandName
-        ..employeeLocation = employeeLocation
+        ..employeeLocation = employeeLatLong
         ..isConfirmed = isConfirmed,
     ),
   );
-
   return firestoreData;
 }

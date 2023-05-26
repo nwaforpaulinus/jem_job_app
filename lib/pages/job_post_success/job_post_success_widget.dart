@@ -5,7 +5,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../navigations/nav.dart';
+
 import 'package:provider/provider.dart';
 import 'job_post_success_model.dart';
 export 'job_post_success_model.dart';
@@ -39,7 +40,7 @@ class _JobPostSuccessWidgetState extends State<JobPostSuccessWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    
 
     return Scaffold(
       key: scaffoldKey,

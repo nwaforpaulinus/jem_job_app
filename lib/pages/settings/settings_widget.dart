@@ -1,9 +1,10 @@
+import '../all_employees/all_employees_widget.dart';
 import '/auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../navigations/nav.dart';
 import 'package:provider/provider.dart';
 import 'settings_model.dart';
 export 'settings_model.dart';
@@ -37,7 +38,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    
 
     return Scaffold(
       key: scaffoldKey,
@@ -126,6 +127,118 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 10.0),
+                                  child: InkWell(
+                                    onTap: () {
+                                     Navigator.push(context, MaterialPageRoute(builder: (context) => AllEmployeesWidget()));
+                                    },
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Container(
+                                              width: 52.0,
+                                              height: 52.0,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondaryBackground,
+                                                borderRadius:
+                                                BorderRadius.circular(15.0),
+                                              ),
+                                              child: Align(
+                                                alignment: AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                child: FlutterFlowIconButton(
+                                                  borderColor: Colors.transparent,
+                                                  borderRadius: 30.0,
+                                                  borderWidth: 1.0,
+                                                  buttonSize: 60.0,
+                                                  fillColor: Color(0xFFDDF5F9),
+                                                  icon: Icon(
+                                                    Icons.task,
+                                                    color: FlutterFlowTheme.of(
+                                                        context)
+                                                        .primary,
+                                                    size: 25.0,
+                                                  ),
+                                                  onPressed: () {
+                                                    print(
+                                                        'IconButton pressed ...');
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  10.0, 0.0, 0.0, 0.0),
+                                              child: Text(
+                                                'Assign Jobs',
+                                                style:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineSmall
+                                                    .override(
+                                                  fontFamily: 'Poppins',
+                                                  color:
+                                                  FlutterFlowTheme.of(
+                                                      context)
+                                                      .primaryText,
+                                                  fontSize: 14.0,
+                                                  fontWeight:
+                                                  FontWeight.normal,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Container(
+                                          width: 52.0,
+                                          height: 52.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                            borderRadius:
+                                            BorderRadius.circular(15.0),
+                                          ),
+                                          child: Align(
+                                            alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                            child: FlutterFlowIconButton(
+                                              borderColor: Colors.transparent,
+                                              borderWidth: 1.0,
+                                              buttonSize: 60.0,
+                                              icon: Icon(
+                                                Icons.navigate_next,
+                                                color:
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
+                                                size: 20.0,
+                                              ),
+                                              onPressed: () async {
+
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+
+                                Divider(
+                                  thickness: 1.0,
+                                  color:
+                                  FlutterFlowTheme.of(context).customColor1,
+                                ),
+
+
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 10.0),
@@ -225,6 +338,16 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                     ],
                                   ),
                                 ),
+
+
+
+
+
+
+
+
+
+
                                 Divider(
                                   thickness: 1.0,
                                   color:

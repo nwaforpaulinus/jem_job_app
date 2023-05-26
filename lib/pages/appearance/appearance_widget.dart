@@ -1,3 +1,5 @@
+import 'package:jem_job_app/navigations/nav.dart';
+
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -35,7 +37,7 @@ class _AppearanceWidgetState extends State<AppearanceWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    
 
     return Scaffold(
       key: scaffoldKey,

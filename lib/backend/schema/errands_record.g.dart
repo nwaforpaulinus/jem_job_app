@@ -210,6 +210,13 @@ class ErrandsRecordBuilder
   LatLng? get location => _$this._location;
   set location(LatLng? location) => _$this._location = location;
 
+
+  LatLng? _destinationLocation;
+  LatLng? get destinationLocation => _$this._destinationLocation;
+  set destinationLocation(LatLng? destinationLocation) => _$this
+      ._destinationLocation =
+      destinationLocation;
+
   String? _address;
   String? get address => _$this._address;
   set address(String? address) => _$this._address = address;

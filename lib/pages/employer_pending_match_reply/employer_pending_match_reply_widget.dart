@@ -5,12 +5,12 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 import 'employer_pending_match_reply_model.dart';
 export 'employer_pending_match_reply_model.dart';
+import '../../navigations/nav.dart';
+
 
 class EmployerPendingMatchReplyWidget extends StatefulWidget {
   const EmployerPendingMatchReplyWidget({Key? key}) : super(key: key);
@@ -43,7 +43,7 @@ class _EmployerPendingMatchReplyWidgetState
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    
 
     return WillPopScope(
       onWillPop: () async => false,

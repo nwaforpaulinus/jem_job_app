@@ -10,6 +10,8 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 import 'job_posting_list_display_model.dart';
 export 'job_posting_list_display_model.dart';
+import '../../navigations/nav.dart';
+
 
 class JobPostingListDisplayWidget extends StatefulWidget {
   const JobPostingListDisplayWidget({Key? key}) : super(key: key);
@@ -44,7 +46,7 @@ class _JobPostingListDisplayWidgetState
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    
 
     return Scaffold(
       key: scaffoldKey,

@@ -9,6 +9,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'job_posting_model.dart';
 export 'job_posting_model.dart';
+import '../../navigations/nav.dart';
+
 
 class JobPostingWidget extends StatefulWidget {
   const JobPostingWidget({Key? key}) : super(key: key);
@@ -41,7 +43,7 @@ class _JobPostingWidgetState extends State<JobPostingWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    
 
     return Scaffold(
       key: scaffoldKey,

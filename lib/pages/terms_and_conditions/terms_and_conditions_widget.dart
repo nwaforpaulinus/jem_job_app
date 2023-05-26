@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'terms_and_conditions_model.dart';
 export 'terms_and_conditions_model.dart';
+import '../../navigations/nav.dart';
+
 
 class TermsAndConditionsWidget extends StatefulWidget {
   const TermsAndConditionsWidget({Key? key}) : super(key: key);
@@ -37,7 +39,7 @@ class _TermsAndConditionsWidgetState extends State<TermsAndConditionsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    
 
     return Scaffold(
       key: scaffoldKey,

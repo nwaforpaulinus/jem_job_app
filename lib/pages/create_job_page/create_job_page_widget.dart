@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'create_job_page_model.dart';
+import '../../navigations/nav.dart';
 export 'create_job_page_model.dart';
 
 class CreateJobPageWidget extends StatefulWidget {
@@ -46,7 +47,7 @@ class _CreateJobPageWidgetState extends State<CreateJobPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    
 
     return Scaffold(
       key: scaffoldKey,

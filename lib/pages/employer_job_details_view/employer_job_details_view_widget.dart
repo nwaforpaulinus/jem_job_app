@@ -9,6 +9,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'employer_job_details_view_model.dart';
 export 'employer_job_details_view_model.dart';
+import '../../navigations/nav.dart';
+
 
 class EmployerJobDetailsViewWidget extends StatefulWidget {
   const EmployerJobDetailsViewWidget({
@@ -46,8 +48,6 @@ class _EmployerJobDetailsViewWidgetState
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,

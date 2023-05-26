@@ -44,7 +44,7 @@ class _ErrandMapDisplayWidgetState extends State<ErrandMapDisplayWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    
 
     return Scaffold(
       key: scaffoldKey,

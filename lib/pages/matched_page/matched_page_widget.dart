@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'matched_page_model.dart';
 export 'matched_page_model.dart';
+import '../../navigations/nav.dart';
+
 
 class MatchedPageWidget extends StatefulWidget {
   const MatchedPageWidget({Key? key}) : super(key: key);
@@ -36,7 +38,7 @@ class _MatchedPageWidgetState extends State<MatchedPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    
 
     return Scaffold(
       key: scaffoldKey,

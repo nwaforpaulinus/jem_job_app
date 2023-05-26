@@ -12,9 +12,10 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:swipeable_card_stack/swipeable_card_stack.dart';
 import 'swipe_screen_employer_model.dart';
 export 'swipe_screen_employer_model.dart';
+import '../../navigations/nav.dart';
+
 
 class SwipeScreenEmployerWidget extends StatefulWidget {
   const SwipeScreenEmployerWidget({Key? key}) : super(key: key);
@@ -103,8 +104,6 @@ class _SwipeScreenEmployerWidgetState extends State<SwipeScreenEmployerWidget>
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,

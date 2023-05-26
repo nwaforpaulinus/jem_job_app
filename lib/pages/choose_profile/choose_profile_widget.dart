@@ -1,3 +1,5 @@
+import 'package:jem_job_app/navigations/nav.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +38,7 @@ class _ChooseProfileWidgetState extends State<ChooseProfileWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    
 
     return Scaffold(
       key: scaffoldKey,

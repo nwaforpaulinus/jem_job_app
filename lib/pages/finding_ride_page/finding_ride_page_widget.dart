@@ -43,7 +43,7 @@ class _FindingRidePageWidgetState extends State<FindingRidePageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    
 
     return StreamBuilder<RideRecord>(
       stream: RideRecord.getDocument(widget.rideDetailsReference!),

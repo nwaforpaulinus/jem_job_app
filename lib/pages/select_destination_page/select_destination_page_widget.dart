@@ -5,11 +5,8 @@ import '/flutter_flow/flutter_flow_place_picker.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/place.dart';
-import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../navigations/nav.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'select_destination_page_model.dart';
 export 'select_destination_page_model.dart';
@@ -49,7 +46,7 @@ class _SelectDestinationPageWidgetState
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    
     if (currentUserLocationValue == null) {
       return Container(
         color: FlutterFlowTheme.of(context).primaryBackground,

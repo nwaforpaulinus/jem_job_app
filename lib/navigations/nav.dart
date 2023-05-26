@@ -3,66 +3,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
-import '../flutter_flow_theme.dart';
 import '../../backend/backend.dart';
-
-import '../../auth/firebase_user_provider.dart';
-
 import '../../index.dart';
 import '../../main.dart';
-import '../lat_lng.dart';
-import '../place.dart';
+import '../providers/app_state_provider.dart';
 import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
 
 const kTransitionInfoKey = '__transition_info__';
-
-class AppStateNotifier extends ChangeNotifier {
-  JemJobAppFirebaseUser? initialUser;
-  JemJobAppFirebaseUser? user;
-  bool showSplashImage = true;
-  String? _redirectLocation;
-
-  /// Determines whether the app will refresh and build again when a sign
-  /// in or sign out happens. This is useful when the app is launched or
-  /// on an unexpected logout. However, this must be turned off when we
-  /// intend to sign in/out and then navigate or perform any actions after.
-  /// Otherwise, this will trigger a refresh and interrupt the action(s).
-  bool notifyOnAuthChange = true;
-
-  bool get loading => user == null || showSplashImage;
-  bool get loggedIn => user?.loggedIn ?? false;
-  bool get initiallyLoggedIn => initialUser?.loggedIn ?? false;
-  bool get shouldRedirect => loggedIn && _redirectLocation != null;
-
-  String getRedirectLocation() => _redirectLocation!;
-  bool hasRedirect() => _redirectLocation != null;
-  void setRedirectLocationIfUnset(String loc) => _redirectLocation ??= loc;
-  void clearRedirectLocation() => _redirectLocation = null;
-
-  /// Mark as not needing to notify on a sign in / out when we intend
-  /// to perform subsequent actions (such as navigation) afterwards.
-  void updateNotifyOnAuthChange(bool notify) => notifyOnAuthChange = notify;
-
-  void update(JemJobAppFirebaseUser newUser) {
-    initialUser ??= newUser;
-    user = newUser;
-    // Refresh the app on auth change unless explicitly marked otherwise.
-    if (notifyOnAuthChange) {
-      notifyListeners();
-    }
-    // Once again mark the notifier as needing to update on auth change
-    // (in order to catch sign in / out events).
-    updateNotifyOnAuthChange(true);
-  }
-
-  void stopShowingSplashImage() {
-    showSplashImage = false;
-    notifyListeners();
-  }
-}
 
 GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
@@ -96,6 +46,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'SignIn',
               path: 'signIn',
               builder: (context, params) => SignInWidget(),
+            ),
+
+
+            FFRoute(
+              name: 'AllEmployeeWidgets',
+              path: 'AllEmployeeWidgets',
+              builder: (context, params) => AllEmployeesWidget(),
             ),
             FFRoute(
               name: 'ChooseProfile',

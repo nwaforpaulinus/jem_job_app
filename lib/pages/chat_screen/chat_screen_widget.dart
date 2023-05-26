@@ -35,7 +35,7 @@ class _ChatScreenWidgetState extends State<ChatScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    
 
     return Scaffold(
       key: scaffoldKey,

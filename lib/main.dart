@@ -1,3 +1,9 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:jem_job_app/providers/user_provider.dart';
+import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -11,6 +17,49 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'index.dart';
+import 'providers/app_state_provider.dart';
+import '../../navigations/nav.dart';
+
+class LocationService {
+  late UserLocation _currentLocation;
+
+  var location = Location();
+  StreamController<UserLocation> _locationController =
+      StreamController<UserLocation>();
+
+  Stream<UserLocation> get locationStream => _locationController.stream;
+
+  LocationService() {
+    print('Location Service');
+    // Request permission to use location
+    location.requestPermission().then((permissionStatus) {
+      if (permissionStatus == PermissionStatus.granted) {
+        // If granted listen to the onLocationChanged stream and emit over our controller
+        location.onLocationChanged.listen((locationData) {
+          _locationController.add(UserLocation(
+            latitude: locationData.latitude,
+            longitude: locationData.longitude,
+          ));
+        });
+      }
+    });
+  }
+
+  Future<UserLocation> getLocation() async {
+    try {
+      var userLocation = await location.getLocation();
+      _currentLocation = UserLocation(
+        latitude: userLocation.latitude,
+        longitude: userLocation.longitude,
+      );
+    } on Exception catch (e) {
+      print('Could not get location: ${e.toString()}');
+    }
+    print(
+        'Location Data: ${_currentLocation.latitude} ${_currentLocation.longitude}');
+    return _currentLocation;
+  }
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,10 +69,19 @@ void main() async {
 
   final appState = FFAppState(); // Initialize FFAppState
 
-  runApp(ChangeNotifierProvider(
-    create: (context) => appState,
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => AppStateNotifier()),
+      ChangeNotifierProvider(create: (context) => UserProvider()),
+    ],
     child: MyApp(),
   ));
+}
+
+class UserLocation {
+  final double? latitude;
+  final double? longitude;
+  UserLocation({required this.latitude, required this.longitude});
 }
 
 class MyApp extends StatefulWidget {
@@ -78,22 +136,38 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Jem Job App',
-      localizationsDelegates: [
-        FFLocalizationsDelegate(),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      locale: _locale,
-      supportedLocales: const [Locale('en', '')],
-      theme: ThemeData(brightness: Brightness.light),
-      darkTheme: ThemeData(brightness: Brightness.dark),
-      themeMode: _themeMode,
-      routeInformationParser: _router.routeInformationParser,
-      routerDelegate: _router.routerDelegate,
-    );
+    return StreamProvider<UserLocation>(
+        initialData: UserLocation(latitude: 0.0, longitude: 0.0),
+        create: (context) => LocationService().locationStream,
+        updateShouldNotify: (prev, current) {
+          if (prev.latitude != current.latitude) {
+
+            FirebaseFirestore.instance.collection('users').doc(FirebaseAuth
+                .instance.currentUser!.uid).update({
+              'location': GeoPoint(current.latitude!, current.longitude!),
+            }).then((value) => print('User Location Updated'));
+
+            return true;
+          }
+          return false;
+        },
+        lazy: false,
+        child: MaterialApp.router(
+          title: 'Jem Job App',
+          localizationsDelegates: [
+            FFLocalizationsDelegate(),
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          locale: _locale,
+          supportedLocales: const [Locale('en', '')],
+          theme: ThemeData(brightness: Brightness.light),
+          darkTheme: ThemeData(brightness: Brightness.dark),
+          themeMode: _themeMode,
+          routeInformationParser: _router.routeInformationParser,
+          routerDelegate: _router.routerDelegate,
+        ));
   }
 }
 
@@ -121,6 +195,8 @@ class _NavBarPageState extends State<NavBarPage> {
 
   @override
   Widget build(BuildContext context) {
+    var userLocation = context.watch<UserLocation>();
+
     final tabs = {
       'SwipeScreenEmployer': SwipeScreenEmployerWidget(),
       'SavedLikedEmployeeScreen': SavedLikedEmployeeScreenWidget(),
@@ -130,6 +206,10 @@ class _NavBarPageState extends State<NavBarPage> {
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(
+      appBar: AppBar(
+        title: Text('${userLocation.latitude}  | '
+            '${userLocation.longitude}'),
+      ),
       body: _currentPage ?? tabs[_currentPageName],
       bottomNavigationBar: GNav(
         selectedIndex: currentIndex,

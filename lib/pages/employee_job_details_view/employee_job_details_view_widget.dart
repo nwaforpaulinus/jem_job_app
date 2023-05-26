@@ -12,6 +12,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'employee_job_details_view_model.dart';
 export 'employee_job_details_view_model.dart';
+import '../../navigations/nav.dart';
+
 
 class EmployeeJobDetailsViewWidget extends StatefulWidget {
   const EmployeeJobDetailsViewWidget({
@@ -72,8 +74,6 @@ class _EmployeeJobDetailsViewWidgetState
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,

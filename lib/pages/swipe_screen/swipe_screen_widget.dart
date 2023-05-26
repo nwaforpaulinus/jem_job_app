@@ -38,7 +38,7 @@ class _SwipeScreenWidgetState extends State<SwipeScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    
 
     return Scaffold(
       key: scaffoldKey,

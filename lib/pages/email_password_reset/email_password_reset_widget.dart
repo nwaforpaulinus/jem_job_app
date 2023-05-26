@@ -6,6 +6,8 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import '../../navigations/nav.dart';
+
 import 'email_password_reset_model.dart';
 export 'email_password_reset_model.dart';
 
@@ -41,7 +43,7 @@ class _EmailPasswordResetWidgetState extends State<EmailPasswordResetWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    
 
     return Scaffold(
       key: scaffoldKey,

@@ -40,7 +40,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    
 
     return Scaffold(
       key: scaffoldKey,

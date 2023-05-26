@@ -1,3 +1,10 @@
+import 'package:go_router/go_router.dart';
+import 'package:jem_job_app/navigations/nav.dart';
+
+import '../../navigations/serialization_util.dart';
+import '../../navigations/views/user_map.dart';
+import '../../navigations/widgets/permissions.dart';
+import '../../providers/user_provider.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -41,7 +48,7 @@ class _AllEmployeesWidgetState extends State<AllEmployeesWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+ final userProvider = context.watch<UserProvider>();
 
     return Scaffold(
       key: scaffoldKey,
@@ -60,12 +67,16 @@ class _AllEmployeesWidgetState extends State<AllEmployeesWidget> {
             size: 24.0,
           ),
           onPressed: () {
-            print('IconButton pressed ...');
+           Navigator.pop(context);
           },
         ),
         title: Text(
           'Assign Job',
-          style: FlutterFlowTheme.of(context).headlineSmall,
+          style: TextStyle(
+            color: FlutterFlowTheme.of(context).secondaryText,
+            fontWeight: FontWeight.bold,
+            fontSize: 14.0,
+          ),
         ),
         actions: [],
         centerTitle: false,
@@ -78,13 +89,14 @@ class _AllEmployeesWidgetState extends State<AllEmployeesWidget> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 10.0),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 12.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
-                      child: TextFormField(
+                      child: TextField(
                         controller: _model.textController,
                         onChanged: (_) => EasyDebounce.debounce(
                           '_model.textController',
@@ -94,67 +106,46 @@ class _AllEmployeesWidgetState extends State<AllEmployeesWidget> {
                         autofocus: true,
                         obscureText: false,
                         decoration: InputDecoration(
-                          labelText: 'Search members...',
-                          labelStyle: FlutterFlowTheme.of(context).bodySmall,
+                          labelText: 'Search members',
+                          labelStyle:
+                              FlutterFlowTheme.of(context).bodyLarge.override(
+                            fontFamily: 'Poppins',
+                            color: FlutterFlowTheme.of(context).primary,
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.normal,
+                          ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0x00000000),
+                              color: FlutterFlowTheme.of(context).primary,
                               width: 1.0,
                             ),
-                            borderRadius: BorderRadius.circular(12.0),
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0x00000000),
+                              color: FlutterFlowTheme.of(context).primary,
                               width: 1.0,
                             ),
-                            borderRadius: BorderRadius.circular(12.0),
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(12.0),
+                          suffixIcon: Icon(
+                            Icons.search_rounded,
+                            color: FlutterFlowTheme.of(context).primary,
                           ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          filled: true,
-                          fillColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
                         ),
-                        style: FlutterFlowTheme.of(context).bodyMedium,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Poppins',
+                          color: FlutterFlowTheme.of(context).primary,
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.normal,
+                        ),
                         maxLines: null,
-                        validator:
-                            _model.textControllerValidator.asValidator(context),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
-                      child: FlutterFlowIconButton(
-                        borderColor: Colors.transparent,
-                        borderRadius: 30.0,
-                        borderWidth: 1.0,
-                        buttonSize: 44.0,
-                        icon: Icon(
-                          Icons.search_rounded,
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          size: 24.0,
-                        ),
-                        onPressed: () {
-                          print('IconButton pressed ...');
-                        },
                       ),
                     ),
                   ],
                 ),
               ),
+              SizedBox(height: 20.0),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
                 child: Text(
@@ -182,16 +173,16 @@ class _AllEmployeesWidgetState extends State<AllEmployeesWidget> {
                         ),
                       );
                     }
-                    List<UsersRecord> listViewUsersRecordList = snapshot.data!;
+                    List<UsersRecord> usersList = snapshot.data!;
                     return ListView.builder(
                       padding: EdgeInsets.zero,
                       primary: false,
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
-                      itemCount: listViewUsersRecordList.length,
+                      itemCount: usersList.length,
                       itemBuilder: (context, listViewIndex) {
                         final listViewUsersRecord =
-                            listViewUsersRecordList[listViewIndex];
+                            usersList[listViewIndex];
                         return Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 4.0, 16.0, 8.0),
@@ -220,41 +211,48 @@ class _AllEmployeesWidgetState extends State<AllEmployeesWidget> {
                                 children: [
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(26.0),
-                                    child: Image.network(
-                                      listViewUsersRecord.photoUrl!,
-                                      width: 36.0,
+                                    child: SizedBox(
                                       height: 36.0,
-                                      fit: BoxFit.cover,
+                                      width: 36.0,
+                                      child:  listViewUsersRecord.photoUrl ==
+                                          '' ?
+                                      Icon(Icons.person) :
+                                      Image.network(
+                                        listViewUsersRecord.photoUrl!,
+                                        width: 36.0,
+                                        height: 36.0,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                   Expanded(
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           12.0, 0.0, 0.0, 0.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            listViewUsersRecord.displayName!,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium,
-                                          ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Text(
-                                                listViewUsersRecord.email!,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodySmall,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                      child: SizedBox(
+                                        width: 40,
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              listViewUsersRecord.displayName!,
+                                              style: FlutterFlowTheme.of(context)
+                                                  .bodyMedium,
+                                            ),
+                                            Text(
+                                              listViewUsersRecord.email!,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodySmall,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -264,7 +262,11 @@ class _AllEmployeesWidgetState extends State<AllEmployeesWidget> {
                                     children: [
                                       FFButtonWidget(
                                         onPressed: () async {
-                                          context.pushNamed('ErrandMapDisplay');
+
+                                          requestPermission();
+
+                                         // Navigator.push(context,
+
                                         },
                                         text: 'Map',
                                         icon: Icon(
@@ -304,6 +306,8 @@ class _AllEmployeesWidgetState extends State<AllEmployeesWidget> {
                                             5.0, 0.0, 0.0, 0.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
+                                            userProvider.updateUserRecord
+                                              (listViewUsersRecord);
                                             context.pushNamed(
                                               'EmployerAssignJob',
                                               queryParams: {

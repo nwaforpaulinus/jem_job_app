@@ -11,6 +11,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'login_page_model.dart';
 export 'login_page_model.dart';
+import '../../navigations/nav.dart';
+
 
 class LoginPageWidget extends StatefulWidget {
   const LoginPageWidget({Key? key}) : super(key: key);
@@ -57,7 +59,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    
 
     return Scaffold(
       key: scaffoldKey,

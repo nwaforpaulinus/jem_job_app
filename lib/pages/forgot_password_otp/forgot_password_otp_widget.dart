@@ -43,7 +43,7 @@ class _ForgotPasswordOtpWidgetState extends State<ForgotPasswordOtpWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    
 
     return Scaffold(
       key: scaffoldKey,
